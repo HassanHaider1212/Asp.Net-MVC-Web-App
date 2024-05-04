@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Customer-wise Orders";
+}
+
+<h2>Customer-wise Orders</h2>
+
+<div>
+    <h3>Select Customer ID to Search Orders:</h3>
+    <table class="table table-responsive">
+        @*<thead>
+            <tr>
+                <th>Customer ID</th>
+            </tr>
+        </thead>*@
+        <tbody>
+            @foreach (var order in ViewBag.CustomerIDs)
+            {
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-link customer-id-btn" data-customerid="@order">@order</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+@using (Html.BeginForm("Search", "Report", FormMethod.Post, new { id = "searchForm" }))
+{
+    <div class="form-group">
+        @Html.Label("Customer ID:")
+        @Html.TextBox("customerId", null, new { @class = "form-control", id = "customerId" })
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+}
+</br>
+<div id="orderListContainer"></div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('.customer-id-btn').click(function () {
+                var customerId = $(this).data('customerid');
+                $('#customerId').val(customerId);
+                $('#searchForm').submit();
+            });
+
+            $('#searchForm').submit(function (e) {
+                e.preventDefault();
+                var customerId = $('#customerId').val();
+                $.ajax({
+                    url: '@Url.Action("Search", "Report")',
+                    type: 'POST',
+                    data: { customerId: customerId },
+                    success: function (data) {
+                        $('#orderListContainer').html(data);
+                    },
+                    error: function () {
+                        alert('Error occurred while searching orders.');
+                    }
+                });
+            });
+        });
+    </script>
+}
