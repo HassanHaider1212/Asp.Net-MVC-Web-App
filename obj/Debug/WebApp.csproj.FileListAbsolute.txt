@@ -51,6 +51,8 @@ D:\ASP Net Application\WebApp\bin\roslyn\vbc.rsp
 D:\ASP Net Application\WebApp\bin\roslyn\VBCSCompiler.exe
 D:\ASP Net Application\WebApp\bin\roslyn\VBCSCompiler.exe.config
 D:\ASP Net Application\WebApp\bin\Antlr3.Runtime.dll
+D:\ASP Net Application\WebApp\bin\EntityFramework.dll
+D:\ASP Net Application\WebApp\bin\EntityFramework.SqlServer.dll
 D:\ASP Net Application\WebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\ASP Net Application\WebApp\bin\Microsoft.Web.Infrastructure.dll
 D:\ASP Net Application\WebApp\bin\Newtonsoft.Json.dll
@@ -62,6 +64,8 @@ D:\ASP Net Application\WebApp\bin\System.Web.WebPages.Deployment.dll
 D:\ASP Net Application\WebApp\bin\System.Web.WebPages.dll
 D:\ASP Net Application\WebApp\bin\System.Web.WebPages.Razor.dll
 D:\ASP Net Application\WebApp\bin\WebGrease.dll
+D:\ASP Net Application\WebApp\bin\EntityFramework.xml
+D:\ASP Net Application\WebApp\bin\EntityFramework.SqlServer.xml
 D:\ASP Net Application\WebApp\bin\System.Web.Helpers.xml
 D:\ASP Net Application\WebApp\bin\System.Web.Mvc.xml
 D:\ASP Net Application\WebApp\bin\System.Web.Optimization.xml
@@ -72,8 +76,8 @@ D:\ASP Net Application\WebApp\bin\System.Web.WebPages.Razor.xml
 D:\ASP Net Application\WebApp\bin\Newtonsoft.Json.xml
 D:\ASP Net Application\WebApp\bin\Antlr3.Runtime.pdb
 D:\ASP Net Application\WebApp\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\ASP Net Application\WebApp\obj\Debug\WebApp.csproj.AssemblyReference.cache
 D:\ASP Net Application\WebApp\obj\Debug\WebApp.csproj.CoreCompileInputs.cache
 D:\ASP Net Application\WebApp\obj\Debug\WebApp.csproj.CopyComplete
 D:\ASP Net Application\WebApp\obj\Debug\WebApp.dll
 D:\ASP Net Application\WebApp\obj\Debug\WebApp.pdb
+D:\ASP Net Application\WebApp\obj\Debug\WebApp.csproj.AssemblyReference.cache

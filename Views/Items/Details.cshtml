@@ -1,0 +1,33 @@
+﻿@model Item
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <span>Item Description</span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDesc)
+        </dd>
+
+        <dt>
+            <span>Item Cost</span>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemCost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemsId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
