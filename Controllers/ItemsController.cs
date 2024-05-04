@@ -46,7 +46,7 @@ namespace WebApp.Controllers
         [ValidateAntiForgeryToken] // to avoid Cross-Site Request Forgery (CSRF)
                                    // attacks occur when an attacker tricks a user into unknowingly
                                    // submitting a malicious request to a web application on which the user is authenticated.
-        public async Task<ActionResult> Create([Bind(Include = "ItemsId,ItemDesc,ItemCost")] Item item)
+        public async Task<ActionResult> Create(Item item)
         {
             if (ModelState.IsValid)
             {

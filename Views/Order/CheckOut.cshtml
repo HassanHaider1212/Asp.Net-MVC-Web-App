@@ -68,9 +68,15 @@
                     method: "POST",
                     data: { items: items, customerId: customerId, totalCost: totalCost },
                     success: function (response) {
-                        alert("Order placed successfully!");
+                        if (response.success) {
+                            alert("Order placed successfully!");
+                            window.location.href = "/Home/Index";
+                        } else {
+                            alert("Error occurred while placing order: " + response.errorMessage);
+                        }
                     },
                     error: function (xhr, status, error) {
+                        debugger;
                         alert("Error occurred while placing order.");
                     }
                 });

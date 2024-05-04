@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Threading.Tasks;
+using System.Data;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
+
 
 namespace WebApp.Controllers
 {
@@ -19,34 +22,44 @@ namespace WebApp.Controllers
 
         [HttpPost]/*, ActionName("Delete")*/
         //[ValidateAntiForgeryToken]
-        public async Task<ActionResult> OrderList(List<OrderDetails> items, Guid customerId, decimal totalCost)
+        public async Task<ActionResult> OrderList(List<OrderDetails> items, string customerId, decimal totalCost)
         {
-            if (items != null)
+            try
             {
-                //[Bind(Include = "ItemsId,ItemDesc,ItemCost")]
-                decimal orderAmount = totalCost;
-                DateTime orderDate = DateTime.Now;
-                OrderMaster order= new OrderMaster();
-                order.OrderedDate = orderDate;
-                order.CustomerID = customerId;
-                order.OrderedAmount = orderAmount;
-                db.OrderMasters.Add(order);
-                await db.SaveChangesAsync();
+                if (items != null && ModelState.IsValid)
+                {
+                    //[Bind(Include = "ItemsId,ItemDesc,ItemCost")]
+                    decimal orderAmount = totalCost;
+                    OrderMaster order = new OrderMaster();
+                    order.OrderedDate = DateTime.Now;
+                    order.CustomerID = customerId;
+                    order.OrderedAmount = orderAmount;
 
-                OrderMaster get_customerId = await db.OrderMasters.FindAsync(customerId);
-                OrderDetails set_orderDetails = new OrderDetails();
-                foreach (var item in items)
-                {   
-                    set_orderDetails.OrderedIDMaster = get_customerId.OrderId;
-                    set_orderDetails.Item = item.Item;
-                    set_orderDetails.Quantity = item.Quantity;
-                    set_orderDetails.Cost = item.Cost;
-                    db.OrderDetails.Add(set_orderDetails);
+                    db.OrderMasters.Add(order);
+                    await db.SaveChangesAsync();
+
+                    //OrderMaster get_customerId = await db.OrderMasters.FindAsync(customerId);
+                    OrderMaster get_customerId = await db.OrderMasters.FirstOrDefaultAsync(o => o.CustomerID == customerId);
+
+                    foreach (var item in items)
+                    {
+                        OrderDetails set_orderDetails = new OrderDetails();
+                        set_orderDetails.OrderedIDMaster = get_customerId.OrderId;
+                        set_orderDetails.Item = item.Item;
+                        set_orderDetails.Quantity = item.Quantity;
+                        set_orderDetails.Cost = item.Cost;
+                        db.OrderDetails.Add(set_orderDetails);
+                    }
+                    await db.SaveChangesAsync();
+                    return Json(new { success = true });
                 }
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
             }
-            return View();
+            catch (Exception error)
+            {
+                Console.WriteLine(error.ToString());
+            }
+
+            return Json(new { success = false, errorMessage = "Error occurred while placing order." });
         }
     }
 }
