@@ -29,9 +29,10 @@
             @Html.DisplayFor(modelItem => item.ItemCost)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemsId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemsId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemsId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ItemsId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ItemsId }) |
+            @*@Html.ActionLink("Delete Name", "Delete", new { id=item.ItemsId })*@
+            @Html.ActionLink("Delete", "Delete", "Items", new { id = item.ItemsId }, null)
         </td>
     </tr>
 }

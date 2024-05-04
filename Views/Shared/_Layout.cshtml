@@ -21,20 +21,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Buyer", "Index", "Order")</li>
-                    <li>@Html.ActionLink("Admin", "Index", "Items")</li>
+                    <li>@Html.ActionLink("Cart", "CheckOut", "Order")</li>
+                    <li>@Html.ActionLink("Store", "Index", "Items")</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - WalMart</p>
-        </footer>
-    </div>
 
+
+    </div>
+    
+    <footer>
+        <hr />
+        <p class="container">&copy; @DateTime.Now.Year - WalMart</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

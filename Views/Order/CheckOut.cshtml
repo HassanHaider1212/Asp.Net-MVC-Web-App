@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Item>
+
+@{
+    ViewBag.Title = "CheckOut Screen";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Items</h2>
+    <table class="table table-responsive">
+        <tr>
+            <th><span>ID</span></th>
+            <th><span>Item</span></th>
+            <th><span>Item Cost</span></th>
+            <th><span>Quantity</span></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ItemsId)</td>
+                <td>@Html.DisplayFor(modelItem => item.ItemDesc)</td>
+                <td>@Html.DisplayFor(modelItem => item.ItemCost)</td>
+                <td>
+                    <input type="checkbox" class="item-checkbox" value="@item.ItemsId" />
+                    <input type="number" class="item-quantity" value="1" min="0" />
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div>
+        <button class="btn btn-primary" id="submit" type="button">Checkout</button>
+    </div>
+
+    <script>
+        function generateGUID() {
+            var guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            return guid;
+        }
+
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                debugger;
+                var totalCost = 0;
+                var customerId = generateGUID();
+                var items = [];
+
+                $(".item-checkbox:checked").each(function () {
+                    let itemId = $(this).val();
+                    let quantity = $(this).closest("tr").find(".item-quantity").val();
+                    let itemCost = $(this).closest("tr").find("td:nth-child(3)").text();
+                    let cost = parseFloat(quantity) * parseFloat(itemCost);
+                    items.push({ Item: itemId, Quantity: quantity, Cost: cost });
+                    totalCost += cost;
+                });
+
+                $.ajax({
+                    url: "/Order/OrderList",
+                    method: "POST",
+                    data: { items: items, customerId: customerId, totalCost: totalCost },
+                    success: function (response) {
+                        alert("Order placed successfully!");
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Error occurred while placing order.");
+                    }
+                });
+            });
+        });
+
+    </script>
+
+</body>

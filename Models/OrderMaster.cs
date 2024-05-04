@@ -3,7 +3,7 @@ using System;
 
 public class OrderMaster
 {
-    [Key] 
+    [Key]
     public int OrderId { get; set; }
 
     public Guid CustomerID { get; set; }
